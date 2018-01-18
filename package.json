@@ -1,0 +1,25 @@
+{
+  "name": "flashcard-generator",
+  "version": "1.0.0",
+  "description": "Basic & Cloze-deleted FlashCard Game by Raj",
+  "main": "flashCardGame.js",
+  "scripts": {
+    "test": "node flashCardGame.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boyrajat/Flashcard-Generator.git"
+  },
+  "keywords": [
+    "basic",
+    "flashcard",
+    "cloze-deleted",
+    "flashcard"
+  ],
+  "author": "Raj Narula",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/boyrajat/Flashcard-Generator/issues"
+  },
+  "homepage": "https://github.com/boyrajat/Flashcard-Generator#readme"
+}
