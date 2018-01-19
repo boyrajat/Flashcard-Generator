@@ -46,7 +46,7 @@ function runBasicFlashCard() {
 
 		inquire.prompt({
 			type: "confirm",
-			message: "\nEnough Practice, Lets play the game with Cloze-Deleted Flash Cards..." +
+			message: "\nEnough Practice? Lets play the game with Cloze-Deleted Flash Cards..." +
 			"\n" + "Ready ?",
 			name: "confirm",
 			default: true
