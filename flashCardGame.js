@@ -1,5 +1,6 @@
 
 var inquire = require("inquirer");
+var fs = require("fs");
 
 var BasicFlashCard = require("./BasicCard.js");
 var ClozeFlashCard = require("./ClozeCard.js");
@@ -25,7 +26,7 @@ ClozeQuestions.push(cquestion3);
 inquire.prompt({
 	type: "list",
 	message: "Please select what would you like to do :" + "\n\n",
-	choices: ["Learn with Basic Flash Cards\n", "Test Yourself With Cloze-Deleted Flash Cards\n"],
+	choices: ["Learn with Basic Flash Cards\n", "Test Yourself With Cloze-Deleted Flash Cards\n", "Create your own Basic Flash Cards\n", "Create your own Cloze Deleted Flash Cards"],
 	name: "userChoice"
 })
 .then(function(inquirerResponse) {
@@ -35,6 +36,10 @@ inquire.prompt({
 		runBasicFlashCard();
 	} else if (inquirerResponse.userChoice === "Test Yourself With Cloze-Deleted Flash Cards\n") {
 		runClozeFlashCard();
+	} else if (inquirerResponse.userChoice === "Create your own Basic Flash Cards\n") {
+		createBasicFlashCard();
+	} else if (inquirerResponse.userChoice === "Create your own Cloze Deleted Flash Cards") {
+		createClozeFlashCard();
 	}
 })
 //console.log(uestions.length);
@@ -105,7 +110,7 @@ function runClozeFlashCard() {
 		message: "\nQuestion: " + ClozeQuestions[clozeQuestion].partial + "\n" +
 				"Answer: ", 
 				
-		name: "answer",
+		name: "answer"
 		//default: true
 		
 		
@@ -132,4 +137,87 @@ function runClozeFlashCard() {
 	})
 	
 }
+}
+
+function createBasicFlashCard() {
+
+	inquire.prompt([{
+		type: "input",
+		message: "You chose to create a Basic Flash Card that has a front and a back side\n" + "PLEASE ENTER THE QUESTION FOR THE FRONT \n-->",
+		name: "front"
+	},
+	{	
+		type: "input",
+		message: "PLEASE ENTER THE ANSWER FOR THE BACK \n-->",
+		name: "back"
+
+	
+	}])
+	.then(function(inquirerResponse) {
+		if (!inquirerResponse.front || !inquirerResponse.back) {
+			console.log("INVALID INPUT");
+			return;
+		} else {
+			var userBasicCard = BasicFlashCard(inquirerResponse.front, inquirerResponse.back);
+			console.log("Your new custom card is : \n\nQUESTION: " + inquirerResponse.front + "\nANSWER: " + inquirerResponse.back + "\n"); 
+			fs.appendFile("log.txt", "QUESTION: " + inquirerResponse.front + "\n" + "ANSWER: " + inquirerResponse.back + "\n\n", function(err) {
+				if (err) {
+					return console.log(err);
+				}
+			})
+			console.log("\nYour new Basic Flash card has been added to the list of cards you have created below: \n")
+			fs.readFile("log.txt", "utf8", function(err, cards) {
+				if (err) {
+					return console.log(err);
+				}
+				console.log(cards);
+			})
+
+		}
+	})
+}
+
+function createClozeFlashCard() {
+
+	inquire.prompt([{
+		type: "input",
+		message: "You chose to create Cloze Flash Card that has a Full text, cloze-deleted text and the cloze\n" + "PLEASE ENTER THE FULL TEXT \n-->",
+		name: "full"
+	},
+	{	
+		type: "input",
+		message: "PLEASE ENTER THE CLOZE TEXT FOR DELETION \n-->",
+		name: "cloze"
+
+	
+	}])
+	.then(function(inquirerResponse) {
+
+		var fullToLower = inquirerResponse.full.toLowerCase();
+		var clozeToLower = inquirerResponse.cloze.toLowerCase();
+
+		if (!inquirerResponse.full || !inquirerResponse.cloze) {
+			console.log("INVALID INPUT");
+			return;
+		} else if (!fullToLower.includes(clozeToLower)) {
+	 	console.log('\n\nERROR - Cloze-Deletion does not appear within full text --- <' + inquirerResponse.cloze + '>' + "\n\n******CARD NOT CREATED. TRY AGAIN******\n\n");
+	 	return;
+	 } else {
+			var userClozeCard = ClozeFlashCard(inquirerResponse.full, inquirerResponse.cloze);
+			console.log("Your new custom card is : \n\nFULL TEXT: " + userClozeCard.full + "\nCLOZE: " + userClozeCard.cloze + "\nPARTIAL: " + userClozeCard.partial + "\n"); 
+			fs.appendFile("log.txt", "FULL TEXT: " + userClozeCard.full + "\n" + "CLOZE: " + userClozeCard.cloze + "\n" + "PARTIAL: " + userClozeCard.partial + "\n\n", function(err) {
+				if (err) {
+					return console.log(err);
+				}
+			})
+			console.log("\nYour new Cloze Flash card has been added to the list of cards you have created below: \n")
+			fs.readFile("log.txt", "utf8", function(err, cards) {
+				if (err) {
+					return console.log(err);
+				}
+				console.log(cards);
+			})
+
+		}
+	})
 }

@@ -1,0 +1,29 @@
+QUESTION: Where is FLorida on the US map ?
+ANSWER: southeast
+
+QUESTION: where is florida on the US map ?
+ANSWER: south east
+
+QUESTION: who is the pres of the US?
+ANSWER: don Trumpo
+
+FULL TEXT: Donald Trumpo is a very bad president
+CLOZE: Trumpo
+PARTIAL: Donald ........ is a very bad president
+
+QUESTION: WHo is the worst president in the US history?
+ANSWER: Donald Trumpo
+
+QUESTION: who is the worst president ?
+ANSWER: donald trumpo
+
+FULL TEXT: donald trumo is the worst
+CLOZE: trumpo
+PARTIAL: donald trumo is the worst
+
+QUESTION: sss
+ANSWER: sss
+
+QUESTION: sdfdasfsaf
+ANSWER: asfsadfasdf
+
