@@ -124,6 +124,7 @@ function runClozeFlashCard() {
 
 		} else {
 			console.log("\n% YOU SUCK. %");
+			console.log("\n Correct Answer: " + ClozeQuestions[clozeQuestion].full);
 			clozeQuestion++;
 			wrongAnswers++
 			runClozeFlashCard();
