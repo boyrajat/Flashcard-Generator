@@ -8,32 +8,32 @@ var ClozeFlashCard = require("./ClozeCard.js");
 var BasicQuestions = [];
 var ClozeQuestions = [];
 //console.log(Questions);
-var bquestion1 = new BasicFlashCard("Which US president has the lowest approval ratings in history ?", "Donald Trump");
+var bquestion1 = BasicFlashCard("Which US president has the lowest approval ratings in history ?", "Donald Trump");
 BasicQuestions.push(bquestion1);
-var bquestion2 = new BasicFlashCard("Which planet is closest to the sun ?", "Mercury");
+var bquestion2 = BasicFlashCard("Which planet is closest to the sun ?", "Mercury");
 BasicQuestions.push(bquestion2);
-var bquestion3 = new BasicFlashCard("What does Frank Hernandez like more than being with us cool kids ?", "Capital One");
+var bquestion3 = BasicFlashCard("What does Frank Hernandez like more than being with us cool kids ?", "Capital One");
 BasicQuestions.push(bquestion3);
 
-var cquestion1 = new ClozeFlashCard("Donald Trump has the lowest approval ratings for president in US History.", "Donald Trump");
+var cquestion1 = ClozeFlashCard("Donald Trump has the lowest approval ratings for president in US History.", "Donald Trump");
 ClozeQuestions.push(cquestion1);
-var cquestion2 = new ClozeFlashCard("Mercury is the planet closest to the sun.", "Mercury");
+var cquestion2 = ClozeFlashCard("Mercury is the planet closest to the sun.", "Mercury");
 ClozeQuestions.push(cquestion2);
-var cquestion3 = new ClozeFlashCard("Frank Hernandez likes Capital One more than being with us cool kids.", "Capital One");
+var cquestion3 = ClozeFlashCard("Frank Hernandez likes Capital One more than being with us cool kids.", "Capital One");
 ClozeQuestions.push(cquestion3);
 
 inquire.prompt({
 	type: "list",
-	message: "Please select what would you like to do :" + "\n",
-	choices: ["Learn with Basic Flash Cards", "Test Yourself With Cloze-Deleted Flash Cards"],
+	message: "Please select what would you like to do :" + "\n\n",
+	choices: ["Learn with Basic Flash Cards\n", "Test Yourself With Cloze-Deleted Flash Cards\n"],
 	name: "userChoice"
 })
 .then(function(inquirerResponse) {
 	console.log("\nYou chose to: ->" + inquirerResponse.userChoice + "\n");
 
-	if (inquirerResponse.userChoice === "Learn with Basic Flash Cards") {
+	if (inquirerResponse.userChoice === "Learn with Basic Flash Cards\n") {
 		runBasicFlashCard();
-	} else if (inquirerResponse.userChoice === "Test Yourself With Cloze-Deleted Flash Cards") {
+	} else if (inquirerResponse.userChoice === "Test Yourself With Cloze-Deleted Flash Cards\n") {
 		runClozeFlashCard();
 	}
 })

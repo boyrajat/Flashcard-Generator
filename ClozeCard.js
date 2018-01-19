@@ -1,6 +1,8 @@
 
 var ClozeCard = function(text, cloze) {
 	
+	if (this instanceof ClozeCard) {
+
 	var textToLower = text.toLowerCase();
 	var clozeToLower = text.toLowerCase();
 
@@ -11,6 +13,10 @@ var ClozeCard = function(text, cloze) {
 	 this.full = text;
 	 this.cloze = cloze;
 	 this.partial = text.replace(cloze, '........');
+	 } else {
+	 	return new ClozeCard(text, cloze);
 	 }
+	}
 
 module.exports = ClozeCard;
+
